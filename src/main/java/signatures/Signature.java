@@ -1,9 +1,10 @@
-package project.two.crypto;
+package signatures;
 
 import java.math.BigInteger;
 
-public class GroupSignSignature {
-	
+
+public class Signature {
+
 	private final BigInteger u;
 	private final BigInteger bigU1;
 	private final BigInteger bigU2;
@@ -13,13 +14,9 @@ public class GroupSignSignature {
 	private final BigInteger ze;
 	private final BigInteger zbigR;
 	private final BigInteger c;
-	private final byte[] m;
-	
 
-
-
-	public GroupSignSignature(BigInteger u, BigInteger bigU1, BigInteger bigU2, BigInteger bigU3, BigInteger zx, BigInteger zr,
-			BigInteger ze, BigInteger zbigR, BigInteger c, byte[] m) {
+	public Signature(BigInteger u, BigInteger bigU1, BigInteger bigU2, BigInteger bigU3, BigInteger zx,
+			BigInteger zr, BigInteger ze, BigInteger zbigR, BigInteger c) {
 		this.u = u;
 		this.bigU1 = bigU1;
 		this.bigU2 = bigU2;
@@ -29,41 +26,41 @@ public class GroupSignSignature {
 		this.ze = ze;
 		this.zbigR = zbigR;
 		this.c = c;
-		this.m = m;
 	}
-	
-	public BigInteger u(){
+
+	public BigInteger getU() {
 		return u;
 	}
-	public BigInteger bigU1(){
+
+	public BigInteger getBigU1() {
 		return bigU1;
 	}
-	public BigInteger bigU2(){
+
+	public BigInteger getBigU2() {
 		return bigU2;
 	}
-	public BigInteger bigU3(){
+
+	public BigInteger getBigU3() {
 		return bigU3;
 	}
-	public BigInteger zx(){
+
+	public BigInteger getZx() {
 		return zx;
 	}
-	public BigInteger zr(){
+
+	public BigInteger getZr() {
 		return zr;
 	}
-	public BigInteger ze(){
+
+	public BigInteger getZe() {
 		return ze;
 	}
 
-	public BigInteger zbigR(){
+	public BigInteger getZbigR() {
 		return zbigR;
 	}
-	public BigInteger c(){
+
+	public BigInteger getC() {
 		return c;
 	}
-	public byte[] m(){
-		return m;
-	}
-	
-	
-
 }
