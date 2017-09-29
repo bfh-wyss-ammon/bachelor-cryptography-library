@@ -2,12 +2,18 @@ package responses;
 
 import java.math.BigInteger;
 
-public class JoinResponse {
+import com.google.gson.annotations.Expose;
 
+public class JoinResponse {
+	@Expose
 	private final BigInteger wi;
+	@Expose
 	private final BigInteger yi;
+	@Expose
 	private final BigInteger Ei;
+	@Expose
 	private final BigInteger ri;
+	@Expose
 	private final BigInteger e;
 
 	public JoinResponse(BigInteger wi, BigInteger yi, BigInteger Ei, BigInteger ri, BigInteger e) {
