@@ -1,18 +1,27 @@
 package signatures;
 
 import java.math.BigInteger;
+import com.google.gson.annotations.Expose;
 
 
 public class Signature {
-
+	@Expose
 	private final BigInteger u;
+	@Expose
 	private final BigInteger bigU1;
+	@Expose
 	private final BigInteger bigU2;
+	@Expose
 	private final BigInteger bigU3;
+	@Expose
 	private final BigInteger zx;
+	@Expose
 	private final BigInteger zr;
+	@Expose
 	private final BigInteger ze;
+	@Expose
 	private final BigInteger zbigR;
+	@Expose
 	private final BigInteger c;
 
 	public Signature(BigInteger u, BigInteger bigU1, BigInteger bigU2, BigInteger bigU3, BigInteger zx,
