@@ -13,7 +13,7 @@ public class Generator {
 		generate(new DefaultSettings(), emptyPublicKey, managerKey);
 	}
 
-	static void generate(Settings settings, PublicKey emptyPublicKey, ManagerKey managerKey) {
+	public static void generate(Settings settings, PublicKey emptyPublicKey, ManagerKey managerKey) {
 		SecureRandom random = new SecureRandom();
 
 		while (true) {
