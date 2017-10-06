@@ -7,12 +7,12 @@ import org.junit.Test;
 import demo.DemoManagerKey;
 import demo.DemoPublicKey;
 import demo.DemoSecretKey;
+import demo.DemoSignature;
 import keys.ManagerKey;
 import keys.SecretKey;
 import keys.PublicKey;
 import requests.JoinRequest;
 import responses.JoinResponse;
-import signatures.Signature;
 import util.Generator;
 
 public class Tests {
@@ -36,7 +36,8 @@ public class Tests {
 
 		byte[] testmessage = new BigInteger("1990").toByteArray();
 
-		Signature signature = SignHelper.sign(memberKey, publicKey, testmessage);
+		DemoSignature signature = new DemoSignature();
+		SignHelper.sign(memberKey, publicKey, testmessage, signature);
 
 		assertTrue(VerifyHelper.verify(publicKey, signature, testmessage));
 	}
@@ -66,8 +67,10 @@ public class Tests {
 
 		byte[] testmessage = new BigInteger("1990").toByteArray();
 
-		Signature signatureA = SignHelper.sign(memberKeyA, publicKey, testmessage);
-		Signature signatureB = SignHelper.sign(memberKeyB, publicKey, testmessage);
+		DemoSignature signatureA = new DemoSignature(); 
+		SignHelper.sign(memberKeyA, publicKey, testmessage, signatureA);
+		DemoSignature signatureB =  new DemoSignature(); 
+		SignHelper.sign(memberKeyB, publicKey, testmessage, signatureB);
 
 		assertTrue(VerifyHelper.verify(publicKey, signatureA, testmessage));
 		assertTrue(VerifyHelper.verify(publicKey, signatureB, testmessage));
