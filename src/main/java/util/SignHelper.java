@@ -14,11 +14,11 @@ import signatures.Signature;
 
 public class SignHelper {
 	
-	public static Signature sign(SecretKey memberKey, PublicKey publicKey, byte[] message) {
-		return sign(new DefaultSettings(), memberKey, publicKey, message);
+	public static void sign(SecretKey memberKey, PublicKey publicKey, byte[] message, Signature emptySignature) {
+		sign(new DefaultSettings(), memberKey, publicKey, message, emptySignature);
 	}
 	
-	public static Signature sign(Settings settings, SecretKey memberKey, PublicKey publicKey, byte[] message) {
+	public static void sign(Settings settings, SecretKey memberKey, PublicKey publicKey, byte[] message, Signature emptySignature) {
 		SecureRandom random = new SecureRandom();
 		// all the variables we need
 		BigInteger r = Math.randVal(random, settings.getModulus() / 2);
@@ -73,7 +73,15 @@ public class SignHelper {
 		BigInteger zbigR = bigRr.add(c.multiply(bigR).mod(publicKey.getBigQ()));
 
 		// return the new signature
-		return new Signature(u, bigU1, bigU2, bigU3, zx, zr, ze, zbigR, c);
+		emptySignature.setU(u);
+		emptySignature.setBigU1(bigU1);
+		emptySignature.setBigU2(bigU2);
+		emptySignature.setBigU3(bigU3);
+		emptySignature.setZx(zx);
+		emptySignature.setZr(zr);
+		emptySignature.setZe(ze);
+		emptySignature.setZbigR(zbigR);
+		emptySignature.setC(c);
 
 	}
 }

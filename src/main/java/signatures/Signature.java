@@ -4,72 +4,41 @@ import java.math.BigInteger;
 import com.google.gson.annotations.Expose;
 
 
-public class Signature {
-	@Expose
-	private final BigInteger u;
-	@Expose
-	private final BigInteger bigU1;
-	@Expose
-	private final BigInteger bigU2;
-	@Expose
-	private final BigInteger bigU3;
-	@Expose
-	private final BigInteger zx;
-	@Expose
-	private final BigInteger zr;
-	@Expose
-	private final BigInteger ze;
-	@Expose
-	private final BigInteger zbigR;
-	@Expose
-	private final BigInteger c;
+public interface Signature {
+	
+	public BigInteger getU();
 
-	public Signature(BigInteger u, BigInteger bigU1, BigInteger bigU2, BigInteger bigU3, BigInteger zx,
-			BigInteger zr, BigInteger ze, BigInteger zbigR, BigInteger c) {
-		this.u = u;
-		this.bigU1 = bigU1;
-		this.bigU2 = bigU2;
-		this.bigU3 = bigU3;
-		this.zx = zx;
-		this.zr = zr;
-		this.ze = ze;
-		this.zbigR = zbigR;
-		this.c = c;
-	}
+	public BigInteger getBigU1();
 
-	public BigInteger getU() {
-		return u;
-	}
+	public BigInteger getBigU2();
 
-	public BigInteger getBigU1() {
-		return bigU1;
-	}
+	public BigInteger getBigU3();
 
-	public BigInteger getBigU2() {
-		return bigU2;
-	}
+	public BigInteger getZx();
 
-	public BigInteger getBigU3() {
-		return bigU3;
-	}
+	public BigInteger getZr();
 
-	public BigInteger getZx() {
-		return zx;
-	}
+	public BigInteger getZe();
 
-	public BigInteger getZr() {
-		return zr;
-	}
+	public BigInteger getZbigR();
 
-	public BigInteger getZe() {
-		return ze;
-	}
+	public BigInteger getC();
+	
+	public void setU(BigInteger u);
 
-	public BigInteger getZbigR() {
-		return zbigR;
-	}
+	public void setBigU1(BigInteger bigU1);
 
-	public BigInteger getC() {
-		return c;
-	}
+	public void setBigU2(BigInteger bigU2);
+
+	public void setBigU3(BigInteger bigU3);
+
+	public void setZx(BigInteger zx);
+
+	public void setZr(BigInteger zr);
+
+	public void setZe(BigInteger ze);
+
+	public void setZbigR(BigInteger zbigR);
+
+	public void setC(BigInteger c);
 }
