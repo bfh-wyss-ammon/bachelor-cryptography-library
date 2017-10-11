@@ -1,3 +1,7 @@
+/**
+ * This class contains the helper methods needed to sign a message.
+ * The sign method takes a public key, a message, a member secret key and an empty siganture.
+ */
 package util;
 
 import java.io.IOException;

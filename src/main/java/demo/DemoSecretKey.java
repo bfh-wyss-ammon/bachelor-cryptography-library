@@ -1,3 +1,7 @@
+/**
+ * Empty Class, that is needed because we need different types
+ * for serialization / transmission and hibernation (ORM mapping).
+ */
 package demo;
 
 import java.math.BigInteger;

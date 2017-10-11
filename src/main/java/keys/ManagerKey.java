@@ -1,3 +1,7 @@
+/**
+ * Interfaces that define getter and setter methods for the Manager Key. 
+ */
+
 package keys;
 
 import java.math.BigInteger;

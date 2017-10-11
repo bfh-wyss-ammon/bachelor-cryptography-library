@@ -1,3 +1,7 @@
+/**
+ * Contains the Default Key Length settings for this scheme
+ * Used only if none are given to the generator.
+ */
 package settings;
 
 public class DefaultSettings implements Settings {

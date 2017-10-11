@@ -1,3 +1,8 @@
+/**
+ * Getter and Setter Interface for the bit length settings of the group
+ * signature scheme.
+ */
+
 package settings;
 
 public interface Settings {
