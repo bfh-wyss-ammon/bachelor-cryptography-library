@@ -3,24 +3,30 @@ package util;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import demo.DemoPublicKey;
 import keys.PublicKey;
 import settings.DefaultSettings;
 import settings.Settings;
 import signatures.Signature;
 
 public class VerifyHelper {
-
+	
 	public static boolean verify(PublicKey publicKey, Signature signature, byte[] message) {
 		return verify(new DefaultSettings(), publicKey, signature, message);
 	}
+	
 
 	public static boolean verify(Settings settings, PublicKey publicKey, Signature signature, byte[] message) {
-
+		
 		if (signature.getZe().bitLength() != (settings.getle() + settings.getlc() + settings.getle())
 				&& signature.getZx().bitLength() != (settings.getlQ() + settings.getlc() + settings.getle()))
-			return false;
+		{
 
+			System.out.println("def false");;
+			return false;
+		}
 		boolean isValid = false;
 		BigInteger vPart1 = publicKey.getA().multiply(publicKey.getW()).modPow(signature.getC().negate(),
 				publicKey.getN());
@@ -44,12 +50,7 @@ public class VerifyHelper {
 				.mod(publicKey.getBigP());
 
 		ArrayList<byte[]> input = new ArrayList<byte[]>();
-		try {
-			input.add(Math.ConvertToBytes(publicKey));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		input.add(HashHelper.getHash(publicKey));
 		input.add(signature.getU().toByteArray());
 		input.add(v.toByteArray());
 		input.add(signature.getBigU1().toByteArray());
@@ -60,7 +61,11 @@ public class VerifyHelper {
 		input.add(bigV3.toByteArray());
 		input.add(message);
 		BigInteger c = Math.GetHash(input);
+		System.out.println("c"+ c);
+		System.out.println("sigc"+ signature.getC());
+		
 		isValid = c.equals(signature.getC());
+			
 
 		return isValid;
 	}
