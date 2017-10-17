@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 import keys.SecretKey;
 import keys.PublicKey;
@@ -50,12 +50,7 @@ public class SignHelper {
 
 		// generate hashing challenge
 		ArrayList<byte[]> input = new ArrayList<byte[]>();
-		try {
-			input.add(Math.ConvertToBytes(publicKey));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		input.add(HashHelper.getHash(publicKey));
 		input.add(u.toByteArray());
 		input.add(v.toByteArray());
 		input.add(bigU1.toByteArray());
@@ -65,6 +60,7 @@ public class SignHelper {
 		input.add(bigV2.toByteArray());
 		input.add(bigV3.toByteArray());
 		input.add(message);
+	
 		BigInteger c = Math.GetHash(input);		
 		BigInteger zx = rx.add(c.multiply(memberKey.getX()));
 

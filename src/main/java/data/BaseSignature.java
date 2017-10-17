@@ -1,48 +1,30 @@
-/**
- * Empty Class, that is needed because we need different types
- * for serialization / transmission and hibernation (ORM mapping).
- */
-package demo;
+package data;
 
 import java.math.BigInteger;
 
 import com.google.gson.annotations.Expose;
 
-import interfaces.HashValue;
 import signatures.Signature;
 
-public class DemoSignature implements Signature {
+public class BaseSignature implements Signature {
 	@Expose
-	@HashValue
 	private BigInteger u;
 	@Expose
-	@HashValue
 	private BigInteger bigU1;
 	@Expose
-	@HashValue
 	private BigInteger bigU2;
 	@Expose
-	@HashValue
 	private BigInteger bigU3;
 	@Expose
-	@HashValue
 	private BigInteger zx;
 	@Expose
-	@HashValue
 	private BigInteger zr;
 	@Expose
-	@HashValue
 	private BigInteger ze;
 	@Expose
-	@HashValue
-	private BigInteger zbigR;	
+	private BigInteger zbigR;
 	@Expose
-	@HashValue
 	private BigInteger c;
-	
-	public DemoSignature() {
-		
-	}
 
 
 

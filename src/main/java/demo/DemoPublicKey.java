@@ -8,6 +8,7 @@ package demo;
 import java.io.Serializable;
 import java.math.BigInteger;
 
+import interfaces.HashValue;
 import keys.PublicKey;
 
 public class DemoPublicKey implements PublicKey, Serializable {
@@ -16,15 +17,25 @@ public class DemoPublicKey implements PublicKey, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@HashValue
 	private BigInteger n;
+	@HashValue
 	private BigInteger a;
+	@HashValue
 	private BigInteger g;
+	@HashValue
 	private BigInteger h;
+	@HashValue
 	private BigInteger w;
+	@HashValue
 	private BigInteger bigQ;
+	@HashValue
 	private BigInteger bigP;
+	@HashValue
 	private BigInteger bigF;
+	@HashValue
 	private BigInteger bigG;
+	@HashValue
 	private BigInteger bigH;
 
 	public DemoPublicKey(BigInteger n, BigInteger a, BigInteger g, BigInteger h, BigInteger bigQ, BigInteger bigP,
@@ -39,6 +50,18 @@ public class DemoPublicKey implements PublicKey, Serializable {
 		this.bigG = bigG;
 		this.bigH = bigH;
 		this.w = w;
+	}
+	public DemoPublicKey(PublicKey publicKey) {
+		this.n = publicKey.getN();
+		this.a = publicKey.getA();
+		this.g = publicKey.getG();
+		this.h = publicKey.getH();
+		this.bigQ = publicKey.getBigQ();
+		this.bigP = publicKey.getBigP();
+		this.bigF = publicKey.getBigF();
+		this.bigG = publicKey.getBigG();
+		this.bigH = publicKey.getBigH();
+		this.w = publicKey.getW();
 	}
 
 	public DemoPublicKey() {
