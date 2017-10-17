@@ -1,3 +1,9 @@
+/**
+ * This is the Key Generator of this Group Signature Scheme.
+ * It generates a new group.
+ * It takes an empty Public Key, empty Manager Key and a class that contains the
+ * bit length settings of the generated key material.
+ */
 package util;
 
 import java.math.*;

@@ -1,3 +1,6 @@
+/**
+ * Interfaces that define getter and setter methods for the Public Key. 
+ */
 package keys;
 
 import java.math.BigInteger;

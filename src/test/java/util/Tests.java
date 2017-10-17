@@ -1,3 +1,7 @@
+/**
+ * Quick Test, if all the methods of the group signature scheme work:
+ * tested methods: generate, init, join, sign, verify and open
+ */
 package util;
 
 import static org.junit.Assert.*;

@@ -1,3 +1,8 @@
+/**
+ * This class contains the method the group manager can use to open a signature.
+ * For this, the group manager needs a public key, a signature, a message
+ * and a manager key.
+ */
 package util;
 
 import java.math.BigInteger;

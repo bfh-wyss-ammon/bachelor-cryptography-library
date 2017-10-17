@@ -1,3 +1,10 @@
+/**
+ * This class wraps the Join Request and Join Response.
+ * It helps to generate the necessary input associated with Join Request.
+ * 
+ * The init method is eventually executed by the member,
+ * join is executed on the Server / group manager.
+ */
 package util;
 
 import java.math.BigInteger;

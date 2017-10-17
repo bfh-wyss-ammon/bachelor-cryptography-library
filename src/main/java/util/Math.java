@@ -1,3 +1,9 @@
+/**
+ * This class contains some methods used by the Generator.
+ * These methods concern:
+ * hashing, finding random values with fixed length and primes with fixed length.
+ */
+
 package util;
 
 import java.io.ByteArrayOutputStream;

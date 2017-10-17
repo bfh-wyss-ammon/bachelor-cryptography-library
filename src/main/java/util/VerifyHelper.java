@@ -1,3 +1,11 @@
+/**
+ * This class contains the verify helper method.
+ * It allows anybody to verify a signature on a message.
+ * The verify method takes a public key, signature and a message.
+ * It returns true if the signature is valid.
+ * It returns false if the signature is invalid.
+ */
+
 package util;
 
 import java.io.IOException;

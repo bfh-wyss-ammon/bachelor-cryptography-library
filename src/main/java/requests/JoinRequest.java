@@ -1,3 +1,9 @@
+/**
+ * After generating its member secret, the member who wants to join 
+ * a group sends a Join Request to the Server. The Join Request contains
+ * bigY (which the server uses to identify the member) and a commitment,
+ * which is proof that the member is in possession of its secret.
+ */
 package requests;
 
 import java.math.BigInteger;
