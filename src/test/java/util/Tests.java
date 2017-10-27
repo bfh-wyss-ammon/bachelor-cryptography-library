@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -21,6 +23,7 @@ import demo.DemoManagerKey;
 import demo.DemoPublicKey;
 import demo.DemoSecretKey;
 import demo.DemoSignature;
+import interfaces.HashValue;
 import keys.ManagerKey;
 import keys.SecretKey;
 import keys.PublicKey;
@@ -56,6 +59,39 @@ public class Tests {
 		
 		assertTrue(VerifyHelper.verify(publicKey, signature, HashHelper.getHash(a)));
 	
+	}
+	
+	class VInvoiceItems {
+		@HashValue
+		private HashMap<String, Integer> items;
+
+		public HashMap<String, Integer> getItems() {
+			return items;
+		}
+
+		public void setItems(HashMap<String, Integer> items) {
+			this.items = items;
+		}
+		
+	}
+	
+	@Test
+	public void hashTest() {
+		
+		HashMap<String, Integer> items = new HashMap<>();
+
+		items.put("testd", 2);
+		items.put("test", 1);
+		items.put("testa", 2);
+		items.put("testb", 3);
+		
+		VInvoiceItems vInvoiceItems = new VInvoiceItems();
+		vInvoiceItems.setItems(items);
+		
+		byte[] blubr = HashHelper.getBytes(vInvoiceItems);
+		String a = Base64.getEncoder().encodeToString(blubr);
+		
+		System.out.println(a);
 	}
 	
 	/*
