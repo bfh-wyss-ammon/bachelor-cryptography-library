@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
+import org.hibernate.mapping.Map;
 
 import interfaces.HashValue;
 
@@ -70,13 +73,8 @@ public class HashHelper {
 				field.setAccessible(true);
 				if (field.isAnnotationPresent(HashValue.class)) {
 					try {
-						if (field.get(value).getClass() == Date.class) {
-							builder.append(dateFormat.format((Date) field.get(value)));
-						} else if (field.get(value).getClass() == BigDecimal.class) {
-							builder.append(((BigDecimal) field.get(value)).toPlainString());
-						} else {
-							builder.append(field.get(value).toString());
-						}
+						setValue(field.get(value), builder);
+
 					} catch (Exception e) {
 						// todo error handling!
 						e.printStackTrace();
@@ -85,6 +83,24 @@ public class HashHelper {
 			}
 		}
 		return builder.toString().getBytes(StandardCharsets.UTF_8);
+	}
+
+	private static void setValue(Object obj, StringBuilder builder) {
+				
+		if (obj.getClass() == Date.class) {
+			builder.append(dateFormat.format((Date) obj));
+		} else if (obj.getClass() == BigDecimal.class) {
+			builder.append(((BigDecimal) obj).toPlainString());
+		} else if (obj.getClass() == HashMap.class) {
+
+			HashMap<?, ?> map = ((HashMap<?, ?>) obj);
+			map.forEach((k, v) -> {
+				setValue(k, builder);
+				setValue(v, builder);
+			});
+		} else {
+			builder.append(obj.toString());
+		}
 	}
 
 }
