@@ -93,8 +93,7 @@ public class Tests {
 		
 		System.out.println(a);
 	}
-	
-	/*
+
 	@Test
 	public void testSignAndVerify() {
 
@@ -183,6 +182,6 @@ public class Tests {
 		assertEquals(0, OpenHelper.open(publicKey, managerKey, testmessage, signatureA, yArr));
 
 	}
-	*/
+
 	
 }
