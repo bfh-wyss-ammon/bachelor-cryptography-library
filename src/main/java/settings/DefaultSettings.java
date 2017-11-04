@@ -19,17 +19,18 @@ public class DefaultSettings implements Settings {
 	private final int le;
 
 	// sets how many rounds of the miller rabin test are run
-	private final int prime_certainty;
-
+	private final int prime_certainty;	
+	
 	public DefaultSettings() {
 		this.modulus = 2048;
-		this.lE = 504;
-		this.lQ = 282;
-		this.lc = 160;
+		this.lE = 696;
+		this.lQ = 378;
+		this.lc = 256;
 		this.le = 60;
-		this.prime_certainty = 100;
+		this.prime_certainty = 40;
 	}
 
+	
 	public int getModulus() {
 		return modulus;
 	}
