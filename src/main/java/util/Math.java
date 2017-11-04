@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Math {
 	public static BigInteger GetHash(ArrayList<byte[]> values) {
 		try {
-		MessageDigest md = MessageDigest.getInstance("SHA-1");
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		BigInteger last = new BigInteger("0");
 		for (byte[] value : values){
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
