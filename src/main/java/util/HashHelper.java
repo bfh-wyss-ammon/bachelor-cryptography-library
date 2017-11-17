@@ -2,6 +2,7 @@ package util;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +14,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.hibernate.mapping.Map;
 
@@ -42,11 +45,13 @@ public class HashHelper {
 		return digest.digest(getBytes(value));
 	}
 
+	private static StringBuilder builder;
+
 	// this methods generate the hash value of an object based ond the @HashValue
 	// Annotation
 	// check the test case for more info
 	public static byte[] getBytes(Object value) {
-		StringBuilder builder = new StringBuilder();
+		builder = new StringBuilder();
 		if (value != null) {
 
 			List<Field> fields = new ArrayList<Field>();
@@ -73,7 +78,7 @@ public class HashHelper {
 				field.setAccessible(true);
 				if (field.isAnnotationPresent(HashValue.class)) {
 					try {
-						setValue(field.get(value), builder);
+						setValue(field.get(value));
 
 					} catch (Exception e) {
 						// todo error handling!
@@ -82,23 +87,33 @@ public class HashHelper {
 				}
 			}
 		}
-		return builder.toString().getBytes(StandardCharsets.UTF_8);
+		String s = builder.toString();
+		return s.getBytes(StandardCharsets.UTF_8);
 	}
 
-	private static void setValue(Object obj, StringBuilder builder) {
-				
+	private static void setValue(Object obj) {
+
 		if (obj.getClass() == Date.class) {
 			builder.append(dateFormat.format((Date) obj));
 		} else if (obj.getClass() == BigDecimal.class) {
 			builder.append(((BigDecimal) obj).toPlainString());
-		} else if (obj.getClass() == HashMap.class) {
+		} else if (obj.getClass() == HashMap.class)
 
-			HashMap<?, ?> map = ((HashMap<?, ?>) obj);
-			map.forEach((k, v) -> {
-				setValue(k, builder);
-				setValue(v, builder);
-			});
-		} else {
+		{
+			HashMap<String, ?> map = ((HashMap<String, ?>) obj);
+			
+			
+			SortedSet<String> keys = new TreeSet<String>(map.keySet());
+			for (String key : keys) { 
+				setValue(key);
+				setValue(map.get(key));
+			}
+		}
+		else if (obj.getClass() == String.class)
+		{
+			builder.append((String)obj);
+		}
+		else {
 			builder.append(obj.toString());
 		}
 	}

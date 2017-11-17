@@ -26,7 +26,21 @@ public class BaseSignature implements Signature {
 	@Expose
 	private BigInteger c;
 
+	public BaseSignature() {
+		
+	}
 
+	public BaseSignature(Signature signature) {
+		this.u = signature.getU();
+		this.bigU1 = signature.getBigU1();
+		this.bigU2 = signature.getBigU2();
+		this.bigU3 = signature.getBigU3();
+		this.zx = signature.getZx();
+		this.zr = signature.getZr();
+		this.ze = signature.getZe();
+		this.zbigR = signature.getZbigR();
+		this.c = signature.getC();
+	}
 
 	public BigInteger getU() {
 		return u;

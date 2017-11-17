@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 
 import demo.DemoPublicKey;
 import keys.PublicKey;
@@ -68,10 +69,7 @@ public class VerifyHelper {
 		input.add(bigV2.toByteArray());
 		input.add(bigV3.toByteArray());
 		input.add(message);
-		BigInteger c = Math.GetHash(input);
-		System.out.println("c"+ c);
-		System.out.println("sigc"+ signature.getC());
-		
+		BigInteger c = Math.GetHash(input);		
 		isValid = c.equals(signature.getC());
 			
 
