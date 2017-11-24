@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +19,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.hibernate.mapping.Map;
-
 import interfaces.HashValue;
 
 public class HashHelper {
@@ -92,6 +92,9 @@ public class HashHelper {
 	}
 
 	private static void setValue(Object obj) {
+		if (obj == null) {
+			return;
+		}
 
 		if (obj.getClass() == Date.class) {
 			builder.append(dateFormat.format((Date) obj));
@@ -101,19 +104,19 @@ public class HashHelper {
 
 		{
 			HashMap<String, ?> map = ((HashMap<String, ?>) obj);
-			
-			
+
 			SortedSet<String> keys = new TreeSet<String>(map.keySet());
-			for (String key : keys) { 
+			for (String key : keys) {
 				setValue(key);
 				setValue(map.get(key));
 			}
-		}
-		else if (obj.getClass() == String.class)
-		{
-			builder.append((String)obj);
-		}
-		else {
+		} else if (obj.getClass() == String.class) {
+			builder.append((String) obj);
+		} else if (obj.getClass() == ArrayList.class) {
+			for (Object ob : (ArrayList) obj) {
+				builder.append(Base64.getEncoder().encodeToString(getBytes(ob)));
+			}
+		} else {
 			builder.append(obj.toString());
 		}
 	}
