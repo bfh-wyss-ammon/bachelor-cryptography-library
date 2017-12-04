@@ -17,25 +17,23 @@ import settings.Settings;
 import signatures.Signature;
 
 public class SignHelper {
-	
+
 	public static void sign(SecretKey memberKey, PublicKey publicKey, byte[] message, Signature emptySignature) {
 		sign(new DefaultSettings(), memberKey, publicKey, message, emptySignature);
 	}
-	
-	public static void sign(Settings settings, SecretKey memberKey, PublicKey publicKey, byte[] message, Signature emptySignature) {
+
+	public static void sign(Settings settings, SecretKey memberKey, PublicKey publicKey, byte[] message,
+			Signature emptySignature) {
 		SecureRandom random = new SecureRandom();
 		// all the variables we need
 		BigInteger r = Math.randVal(random, settings.getModulus() / 2);
 		BigInteger bigR = Math.randValModP(random, settings.getlQ(), publicKey.getBigQ());
-		BigInteger u = publicKey.getH().modPow(r, publicKey.getN()).multiply(memberKey.getY()).mod(publicKey.getN()).multiply(memberKey.getW()).mod(publicKey.getN());
-		
-		
-		
+		BigInteger u = publicKey.getH().modPow(r, publicKey.getN()).multiply(memberKey.getY()).mod(publicKey.getN())
+				.multiply(memberKey.getW()).mod(publicKey.getN());
+
 		BigInteger bigU1 = publicKey.getBigF().modPow(bigR, publicKey.getBigP());
 		BigInteger bigU2 = publicKey.getBigG().modPow(bigR.add(memberKey.getX()), publicKey.getBigP());
 		BigInteger bigU3 = publicKey.getBigH().modPow(bigR.add(memberKey.getE()), publicKey.getBigP());
-
-
 
 		BigInteger rx = Math.randVal(random, settings.getlQ() + settings.getlc() + settings.getle());
 		BigInteger rr = Math.randVal(random, settings.getModulus() / 2 + settings.getlc() + settings.getle());
@@ -60,8 +58,8 @@ public class SignHelper {
 		input.add(bigV2.toByteArray());
 		input.add(bigV3.toByteArray());
 		input.add(message);
-	
-		BigInteger c = Math.GetHash(input);		
+
+		BigInteger c = Math.GetHash(input);
 		BigInteger zx = rx.add(c.multiply(memberKey.getX()));
 
 		BigInteger res = memberKey.getR().negate().subtract(r.multiply(memberKey.getBigE()));

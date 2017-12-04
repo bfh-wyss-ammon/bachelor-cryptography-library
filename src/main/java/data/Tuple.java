@@ -1,3 +1,8 @@
+/**
+ * This class stores the data that belongs to a position tuple of the driving protocol. we had to put this in the crypto library because we don't want to install the common lib on the mobile application.
+ * This class is also used for serializing, parsing and hashing the position tuple and its signature.
+ */
+
 package data;
 
 import java.math.BigDecimal;

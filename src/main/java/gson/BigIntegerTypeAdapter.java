@@ -1,3 +1,7 @@
+/**
+ * This class handles the google JSON parser (doesn't allow BigInteger type).
+ */
+
 package gson;
 
 import java.io.IOException;

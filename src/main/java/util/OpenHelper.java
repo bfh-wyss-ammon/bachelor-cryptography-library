@@ -12,9 +12,9 @@ import keys.PublicKey;
 import signatures.Signature;
 
 public class OpenHelper {
-	
-	
-	public static int open(PublicKey publicKey, ManagerKey managerKey, byte[] message, Signature signature, BigInteger[] YList) {
+
+	public static int open(PublicKey publicKey, ManagerKey managerKey, byte[] message, Signature signature,
+			BigInteger[] YList) {
 		if (!VerifyHelper.verify(publicKey, signature, message))
 			return -1;
 		BigInteger bigU1 = signature.getBigU1().modPow(managerKey.getXg(), publicKey.getBigP());

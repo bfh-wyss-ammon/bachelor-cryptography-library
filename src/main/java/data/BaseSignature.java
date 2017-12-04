@@ -1,3 +1,7 @@
+/**
+ * This class is for transmission of a group signature.
+ */
+
 package data;
 
 import java.math.BigInteger;
