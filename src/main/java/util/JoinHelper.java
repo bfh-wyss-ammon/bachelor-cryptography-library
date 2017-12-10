@@ -1,8 +1,8 @@
 /**
  * This class wraps the Join Request and Join Response.
- * It helps to generate the necessary input associated with Join Request.
+ * It helps to generate the necessary input associated with Join Request. Handles the different states of the group join process.
  * 
- * The init method is eventually executed by the member,
+ * The init method is executed by the member,
  * join is executed on the Server / group manager.
  */
 package util;
@@ -44,7 +44,8 @@ public class JoinHelper {
 		BigInteger commitment = joinRequest.getCommitment().multiply(publicKey.getH().modPow(ri, publicKey.getN()));
 		BigInteger part = publicKey.getA().multiply(commitment).mod(publicKey.getN());
 
-		BigInteger totient = managerKey.getP().subtract(BigInteger.ONE).multiply(managerKey.getQ().subtract(BigInteger.ONE));
+		BigInteger totient = managerKey.getP().subtract(BigInteger.ONE)
+				.multiply(managerKey.getQ().subtract(BigInteger.ONE));
 		BigInteger privat = bigE.modInverse(totient);
 
 		// encrypt res
@@ -57,6 +58,7 @@ public class JoinHelper {
 	public static void init(PublicKey publicKey, SecretKey secretKey) {
 		init(new DefaultSettings(), publicKey, secretKey);
 	}
+
 	public static void init(Settings settings, PublicKey publicKey, SecretKey secretKey) {
 		SecureRandom random = new SecureRandom();
 		BigInteger xi = Math.RandValModP(random, settings.getModulus(), publicKey.getN());
@@ -69,7 +71,7 @@ public class JoinHelper {
 		}
 		BigInteger commitment = publicKey.getG().modPow(xi, publicKey.getN())
 				.multiply(publicKey.getH().modPow(ri, publicKey.getN())).mod(publicKey.getN());
-		
+
 		secretKey.setX(xi);
 		secretKey.setR(ri);
 		secretKey.setBigY(bigY);

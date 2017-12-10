@@ -21,19 +21,18 @@ import settings.Settings;
 import signatures.Signature;
 
 public class VerifyHelper {
-	
+
 	public static boolean verify(PublicKey publicKey, Signature signature, byte[] message) {
 		return verify(new DefaultSettings(), publicKey, signature, message);
 	}
-	
 
 	public static boolean verify(Settings settings, PublicKey publicKey, Signature signature, byte[] message) {
-		
-		if (signature.getZe().bitLength() != (settings.getle() + settings.getlc() + settings.getle())
-				&& signature.getZx().bitLength() != (settings.getlQ() + settings.getlc() + settings.getle()))
-		{
 
-			System.out.println("def false");;
+		if (signature.getZe().bitLength() != (settings.getle() + settings.getlc() + settings.getle())
+				&& signature.getZx().bitLength() != (settings.getlQ() + settings.getlc() + settings.getle())) {
+
+			System.out.println("def false");
+			;
 			return false;
 		}
 		boolean isValid = false;
@@ -69,9 +68,8 @@ public class VerifyHelper {
 		input.add(bigV2.toByteArray());
 		input.add(bigV3.toByteArray());
 		input.add(message);
-		BigInteger c = Math.GetHash(input);		
+		BigInteger c = Math.GetHash(input);
 		isValid = c.equals(signature.getC());
-			
 
 		return isValid;
 	}
