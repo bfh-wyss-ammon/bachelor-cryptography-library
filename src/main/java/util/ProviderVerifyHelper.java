@@ -16,34 +16,34 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * This class contains the method the group manager can use to open a signature.
- * For this, the group manager needs a public key, a signature, a message
- * and a manager key.
  */
 
 package util;
 
-import java.math.BigInteger;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
-import keys.ManagerKey;
-import keys.PublicKey;
-import signatures.Signature;
 
-public class OpenHelper {
-
-	public static int open(PublicKey publicKey, ManagerKey managerKey, byte[] message, Signature signature,
-			BigInteger[] YList) {
-		if (!VerifyHelper.verify(publicKey, signature, message))
-			return -1;
-		BigInteger bigU1 = signature.getBigU1().modPow(managerKey.getXg(), publicKey.getBigP());
-
-		int i = 0;
-		for (BigInteger bigY : YList) {
-			if (bigU1.multiply(bigY).mod(publicKey.getBigP()).equals(signature.getBigU2())) {
-				return i;
-			}
-			i++;
+public class ProviderVerifyHelper {
+	
+	public static boolean verify(byte[] message, byte[] signature, String base64publickey) {
+		try {
+			byte[] publicKeyEncoded = Base64.getDecoder().decode(base64publickey);
+			X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(publicKeyEncoded);
+			KeyFactory keyFactory = KeyFactory.getInstance("DSA", "SUN");
+			PublicKey pubKey = keyFactory.generatePublic(pubKeySpec);
+			Signature sig = Signature.getInstance("SHA256withDSA", "SUN");
+			sig.initVerify(pubKey);
+			sig.update(message);
+			return sig.verify(signature);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
 		}
-		return -1;
 	}
+
 }
